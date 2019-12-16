@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class SunGlow : MonoBehaviour
 {
-    private Material sunMat;
+    private MeshRenderer sunRenderer;
 
     public float duration;
 
     void Awake()
     {
-        sunMat = GetComponent<MeshRenderer>().material;
+        sunRenderer = GetComponent<MeshRenderer>();
+        //draw sun in front
+        sunRenderer.sortingOrder = 2;
     }
     // Start is called before the first frame update
     void Start()
@@ -29,7 +31,7 @@ public class SunGlow : MonoBehaviour
         float phi = Time.time / duration * 2 * Mathf.PI;
         float amplitude = Mathf.Cos(phi) * 0.5f + 0.5f;
 
-        sunMat.SetFloat("_GlowScale", amplitude);
+        sunRenderer.material.SetFloat("_GlowScale", amplitude);
     }
 
 
